@@ -2,8 +2,6 @@ g_Artboard = LuaScreen.GetScreenEntities("artboard")[1]
 
 print("Starting artboard fun")
 
-//print(CurTime() - g_Artboard.TimeoutWhen < g_Artboard.TimeoutTime)
-
 local BaseOffset = {}; BaseOffset.x=0; BaseOffset.y=0
 
 local function l_pxPos(x, y)
@@ -15,19 +13,15 @@ local pix_data = {}
 local pix_data_full = util.JSONToTable(file.Read("artboard_files/image.json"))
 for k, v in pairs(pix_data_full) do
 	table.Add(pix_data, v)
-	//PrintTable(v[#v])
-	//print(#v)
 end
-//print(#pix_data)
---PrintTable(LuaScreen.GetScreenEntities("artboard")[1].Palette)
-local it = 1
 
+//PrintTable(LuaScreen.GetScreenEntities("artboard")[1].Palette)
 //if CLIENT then return end
-
-local AntiFun = 0
 
 print("Loaded:[".. tostring(pix_data) .. "] " .. #pix_data_full .. ":parts " .. #pix_data .. ":pixels")
 
+local it = 1
+local AntiFun = 0
 local maxSanity = 10000
 local sanityIterator = 0
 local AddedPixels = 0

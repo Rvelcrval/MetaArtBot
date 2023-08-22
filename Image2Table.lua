@@ -1,6 +1,7 @@
 local png = require("include/png")
 local json = require("include/json")
 
+local Folder = [[D:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\artboard_files\image.json]]
 local Palette = {
 	[1] = {
 		["r"] = 255,
@@ -396,14 +397,6 @@ while true do
 	}
 end
 
---local pixel = img.pixels[testVal.pixelCoords.x][testVal.pixelCoords.y]
-
---PrintTable(pixels)
-
---for i=1, string.len(img.data) do
---	print(string.format("%X", img.data))
---end
-
 print("Converting Pixels To ArtboardTable.")
 local ret_tbl = {}
 local it = 1
@@ -430,16 +423,7 @@ for y,row in pairs(pixels) do
 			table.sort(simtbl,function(dc1,dc2)
 				return dc1.dc<dc2.dc
 			end)
-			--if simtbl[1].id ~= 16 then
-			--PrintTable(simtbl)
-			--end
-			
-			--ret_tbl[math.floor(it / 15000)] = {
-			--	[it] = {
-			--		["xy"] = l_pxPos(x, y),
-			--		["id"] = simtbl[1].id
-			--	}
-			--}
+	
 			local part = math.floor(it / 15000)+ 1
 
 			if not ret_tbl[part] then ret_tbl[part] = {} end
@@ -462,10 +446,9 @@ for y,row in pairs(pixels) do
 	end
 end
 
-local output = io.open(
-	[[D:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\artboard_files\image.json]],"w")
+local output = io.open(Folder,"w")
 
 print("Writing ArtboardTable As Json.")
-output:write(tostring(json.encode(--[[(#ret_tbl == 1) and ret_tbl[1] or ]]ret_tbl)))
+output:write(tostring(json.encode(ret_tbl)))
 io.close(output)
 print("Done!!!")
