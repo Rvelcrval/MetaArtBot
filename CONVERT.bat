@@ -1,0 +1,1 @@
+".\LuaJIT\luajit.exe" Image2Table.lua
